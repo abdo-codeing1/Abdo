@@ -4,7 +4,7 @@ import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com
 
 // Firebase configuration
 const firebaseConfig = {
-  apiKey: "YOUR_NEW_API_KEY",
+  apiKey: "AIzaSyAOkXzcjRDRA-fH6BHiv4TY7vujcITvjE4",
   authDomain: "school1-8dbfa.firebaseapp.com",
   projectId: "school1-8dbfa",
   storageBucket: "school1-8dbfa.appspot.com",

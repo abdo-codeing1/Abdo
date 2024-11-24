@@ -37,7 +37,7 @@ document.getElementById('loginForm').addEventListener('submit', async (event) =>
 
     if (!querySnapshot.empty) {
       // إذا كانت البيانات صحيحة، انقل المستخدم إلى صفحة dashboard
-      window.location.href = "dashboard.html";
+      window.location.href = "teacher_dashboard.html";
     } else {
       // إذا كانت البيانات غير صحيحة، عرض رسالة خطأ
       document.getElementById('errorMessage').textContent = "بياناتك غير صحيحة. حاول مرة أخرى.";

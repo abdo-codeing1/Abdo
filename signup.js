@@ -36,9 +36,9 @@ signupForm.addEventListener('submit', async (event) => {
     alert(`تم إنشاء الحساب بنجاح كـ ${userType}`);
     // Redirect based on userType
     if (userType === "teacher") {
-      window.location.href = "/teacher-dashboard.html";
+      window.location.href = "/teacher.html";
     } else {
-      window.location.href = "/student-dashboard.html";
+      window.location.href = "/student.html";
     }
   } catch (error) {
     document.getElementById('errorMessage').textContent = error.message;

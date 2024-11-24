@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>لوحة تحكم المعلم</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>مرحبًا بك في لوحة التحكم</h1>
+    
+    <!-- قسم إنشاء الاختبارات -->
+    <section id="quiz-section">
+      <h2>إنشاء اختبار</h2>
+      <form id="quizForm">
+        <label for="quizTitle">عنوان الاختبار:</label>
+        <input type="text" id="quizTitle" placeholder="أدخل عنوان الاختبار" required>
+
+        <label for="quizQuestions">الأسئلة:</label>
+        <textarea id="quizQuestions" placeholder="أدخل الأسئلة (سؤال في كل سطر)" required></textarea>
+
+        <button type="submit">إنشاء اختبار</button>
+      </form>
+      <p id="quizMessage" class="success-message"></p>
+    </section>
+
+    <!-- قسم النشر -->
+    <section id="publish-section">
+      <h2>النشر</h2>
+      <form id="publishForm">
+        <label for="publishContent">المحتوى:</label>
+        <textarea id="publishContent" placeholder="أدخل نصًا أو وصفًا للمحتوى" required></textarea>
+
+        <label for="publishFile">إرفاق ملف:</label>
+        <input type="file" id="publishFile">
+
+        <button type="submit">نشر</button>
+      </form>
+      <p id="publishMessage" class="success-message"></p>
+    </section>
+
+    <!-- قسم الإشعارات -->
+    <section id="notifications-section">
+      <h2>الإشعارات</h2>
+      <ul id="notificationsList">
+        <!-- ستظهر الإشعارات هنا -->
+      </ul>
+    </section>
+  </div>
+
+  <script src="./teacher_dashboard.js"></script>
+</body>
+</html>

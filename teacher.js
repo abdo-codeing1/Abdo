@@ -1,6 +1,6 @@
 // Import Firebase modules
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
 // إعداد Firebase
 const firebaseConfig = {
@@ -16,8 +16,8 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// التعامل مع نموذج تسجيل المعلم
-document.getElementById('teacherForm').addEventListener('submit', async (event) => {
+// التعامل مع تسجيل الدخول
+document.getElementById('loginForm').addEventListener('submit', async (event) => {
   event.preventDefault();
 
   const teacherName = document.getElementById('teacherName').value.trim();
@@ -25,23 +25,27 @@ document.getElementById('teacherForm').addEventListener('submit', async (event) 
   const teacherPhone = document.getElementById('teacherPhone').value.trim();
 
   try {
-    // إضافة معلومات المعلم إلى Firestore
-    await addDoc(collection(db, 'teachers'), {
-      name: teacherName,
-      nationalID: teacherID,
-      phone: teacherPhone,
-      createdAt: serverTimestamp(),
-    });
+    // البحث عن بيانات المعلم في Firestore
+    const q = query(
+      collection(db, "teachers"),
+      where("name", "==", teacherName),
+      where("nationalID", "==", teacherID),
+      where("phone", "==", teacherPhone)
+    );
 
-    // عرض رسالة نجاح
-    document.getElementById('successMessage').style.display = 'block';
-    document.getElementById('errorMessage').style.display = 'none';
+    const querySnapshot = await getDocs(q);
 
-    // إعادة تعيين النموذج
-    document.getElementById('teacherForm').reset();
+    if (!querySnapshot.empty) {
+      // إذا كانت البيانات صحيحة، انقل المستخدم إلى صفحة dashboard
+      window.location.href = "dashboard.html";
+    } else {
+      // إذا كانت البيانات غير صحيحة، عرض رسالة خطأ
+      document.getElementById('errorMessage').textContent = "بياناتك غير صحيحة. حاول مرة أخرى.";
+      document.getElementById('errorMessage').style.display = 'block';
+    }
   } catch (error) {
-    console.error("Error saving teacher data: ", error);
-    document.getElementById('errorMessage').textContent = 'حدث خطأ أثناء التسجيل. حاول مرة أخرى.';
+    console.error("Error during login:", error);
+    document.getElementById('errorMessage').textContent = "حدث خطأ أثناء تسجيل الدخول. حاول مرة أخرى.";
     document.getElementById('errorMessage').style.display = 'block';
   }
 });
